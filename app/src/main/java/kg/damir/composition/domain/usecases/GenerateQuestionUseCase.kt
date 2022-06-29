@@ -1,4 +1,14 @@
 package kg.damir.composition.domain.usecases
 
-class GenerateQuestionUseCase {
+import kg.damir.composition.domain.entity.Question
+import kg.damir.composition.domain.repository.GameRepository
+
+class GenerateQuestionUseCase(private val repository: GameRepository) {
+    operator fun invoke(maxSumValue: Int): Question {
+        return repository.generateQuestions(maxSumValue, COUNT_oF_OPTIONS)
+    }
+
+    companion object {
+        private const val COUNT_oF_OPTIONS = 6
+    }
 }

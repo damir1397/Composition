@@ -4,6 +4,10 @@ import kg.damir.composition.domain.entity.GameSettings
 import kg.damir.composition.domain.entity.Question
 
 interface GameRepository {
-    fun generateQuestions():Question
-    fun generateSettings():GameSettings
+    fun generateQuestions(
+        maxSumValue: Int,
+        countOfOptions: Int
+    ): Question
+
+    fun generateSettings(): GameSettings
 }
