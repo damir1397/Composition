@@ -1,6 +1,7 @@
 package kg.damir.composition.domain.repository
 
 import kg.damir.composition.domain.entity.GameSettings
+import kg.damir.composition.domain.entity.Level
 import kg.damir.composition.domain.entity.Question
 
 interface GameRepository {
@@ -9,5 +10,5 @@ interface GameRepository {
         countOfOptions: Int
     ): Question
 
-    fun generateSettings(): GameSettings
+    fun generateSettings(level: Level): GameSettings
 }
