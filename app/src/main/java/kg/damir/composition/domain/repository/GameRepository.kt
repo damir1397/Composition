@@ -10,5 +10,5 @@ interface GameRepository {
         countOfOptions: Int
     ): Question
 
-    fun generateSettings(level: Level): GameSettings
+    fun getGameSettings(level: Level): GameSettings
 }

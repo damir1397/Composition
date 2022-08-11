@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kg.damir.composition.databinding.FragmentGameFinishedBinding
+import kg.damir.composition.domain.entity.GameResult
 
 
 class GameFinishedFragment : Fragment() {
+    private lateinit var gameResult: GameResult
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding == null")
@@ -21,6 +23,10 @@ class GameFinishedFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parseArgs()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,5 +37,20 @@ class GameFinishedFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    fun parseArgs() {
+        gameResult = requireArguments().getSerializable(KEY_GAME_RESULT) as GameResult
+    }
+
+    companion object {
+        private const val KEY_GAME_RESULT = "game_result"
+        fun newInstance(gameResult: GameResult): GameFinishedFragment {
+            return GameFinishedFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(KEY_GAME_RESULT, gameResult)
+                }
+            }
+        }
     }
 }

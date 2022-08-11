@@ -11,6 +11,7 @@ import kotlin.random.Random
 object GameRepositoryImpl : GameRepository {
     private const val MIN_SUM_VALUE = 2
     private const val MIN_ANSWER_VALUE = 1
+
     override fun generateQuestions(maxSumValue: Int, countOfOptions: Int): Question {
         val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue + 1)
         val visibleNumber = Random.nextInt(MIN_ANSWER_VALUE, sum)
@@ -27,7 +28,7 @@ object GameRepositoryImpl : GameRepository {
 
     }
 
-    override fun generateSettings(level: Level): GameSettings {
+    override fun getGameSettings(level: Level): GameSettings {
         return when (level) {
 
             Level.TEST -> {
