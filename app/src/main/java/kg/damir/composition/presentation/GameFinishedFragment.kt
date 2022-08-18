@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kg.damir.composition.databinding.FragmentGameFinishedBinding
 import kg.damir.composition.domain.entity.GameResult
 
@@ -30,7 +32,15 @@ class GameFinishedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                retryGame()
+            }
+        })
+
+        binding.buttonRetry.setOnClickListener {
+            retryGame()
+        }
     }
 
 
@@ -39,8 +49,15 @@ class GameFinishedFragment : Fragment() {
         _binding = null
     }
 
-    fun parseArgs() {
-        gameResult = requireArguments().getSerializable(KEY_GAME_RESULT) as GameResult
+    private fun parseArgs() {
+        gameResult = requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT) as GameResult
+    }
+
+    private fun retryGame() {
+        requireActivity().supportFragmentManager.popBackStack(
+            GameFragment.NAME,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 
     companion object {
@@ -48,7 +65,7 @@ class GameFinishedFragment : Fragment() {
         fun newInstance(gameResult: GameResult): GameFinishedFragment {
             return GameFinishedFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_GAME_RESULT, gameResult)
+                    putParcelable(KEY_GAME_RESULT, gameResult)
                 }
             }
         }
