@@ -9,6 +9,6 @@ class GenerateQuestionUseCase(private val repository: GameRepository) {
     }
 
     companion object {
-        private const val COUNT_oF_OPTIONS = 6
+        private const val CO UNT_oF_OPTIONS = 6
     }
 }

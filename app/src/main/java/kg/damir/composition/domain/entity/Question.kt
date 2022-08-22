@@ -4,6 +4,10 @@ import java.io.Serializable
 
 data class Question(
     val sum: Int,
-    val visibleNumberL: Int,
+    val visibleNumber: Int,
     val options: List<Int>
-): Serializable
+){
+
+    val rightAnswer: Int
+        get() = sum - visibleNumber
+}
