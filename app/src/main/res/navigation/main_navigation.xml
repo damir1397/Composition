@@ -25,7 +25,11 @@
         android:id="@+id/gameFinishedFragment"
         android:name="kg.damir.composition.presentation.GameFinishedFragment"
         android:label="fragment_game_finished"
-        tools:layout="@layout/fragment_game_finished" />
+        tools:layout="@layout/fragment_game_finished" >
+        <argument
+            android:name="gameResult"
+            app:argType="kg.damir.composition.domain.entity.GameResult" />
+    </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="kg.damir.composition.presentation.GameFragment"
